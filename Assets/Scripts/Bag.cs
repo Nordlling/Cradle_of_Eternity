@@ -23,6 +23,6 @@ public class Bag : MonoBehaviour
 
     private void OnDestroy()
     {
-        Instance = null;
+        //Instance = null;
     }
 }

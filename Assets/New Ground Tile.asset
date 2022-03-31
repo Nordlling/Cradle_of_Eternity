@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bcbb8576a9329c47a54b19b53873479, type: 3}
+  m_Name: New Ground Tile
+  m_EditorClassIdentifier: 
+  Default: {fileID: 7482667652216324306, guid: 576992a4b91c99f48b5f3853aa0fb046, type: 3}
