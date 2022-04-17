@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176e17272195cc0429f3a9cf914fce0e, type: 3}
   m_Name: Moon_Sword
   m_EditorClassIdentifier: 
-  _name: "\u0422\u043E\u043F\u043E\u0440"
-  _uiIcon: {fileID: 4638950847070955592, guid: 439d6be5695f4a04194d8031977a475b, type: 3}
+  _name: "\u041B\u0443\u043D\u043D\u044B\u0439 \u041C\u0435\u0447"
+  _uiIcon: {fileID: 1518363075290452430, guid: 9ecc3536a88a6ee40bc1a9b1255be122, type: 3}

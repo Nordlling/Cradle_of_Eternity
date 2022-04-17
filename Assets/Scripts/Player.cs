@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Player : MonoBehaviour
 {
@@ -14,6 +13,39 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Animator _animatorController;
     private float _walkTime = 0, _walkCooldown = 0.2f;
+    
+    private RaycastHit2D[] hits;
+
+
+    private void Start()
+    {
+        _transform = GetComponent<Transform>();
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _animatorController = GetComponent<Animator>();
+        _directionState = transform.localScale.x > 0 ? DirectionState.Right : DirectionState.Left;
+    }
+
+    private void Update()
+    {
+
+        if (_moveState == MoveState.Jump && CheckGround())
+        {
+            if (_rigidbody.velocity == Vector2.zero)
+            {
+                Idle();
+            }
+        }
+        else if (_moveState == MoveState.Walk && CheckGround())
+        {
+            _rigidbody.velocity = ((_directionState == DirectionState.Right ? Vector2.right : -Vector2.right)
+                                    * WalkSpeed * Time.deltaTime);
+            _walkTime -= Time.deltaTime;
+            if (_walkTime <= 0)
+            {
+                Idle();
+            }
+        }
+    }
 
     public void MoveRight()
     {
@@ -54,42 +86,19 @@ public class Player : MonoBehaviour
         }
     }
 
-
     private void Idle()
     {
         _moveState = MoveState.Idle;
         _animatorController.Play("Idle");
     }
 
-    private void Start()
+    private bool CheckGround()
     {
-        _transform = GetComponent<Transform>();
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _animatorController = GetComponent<Animator>();
-        _directionState = transform.localScale.x > 0 ? DirectionState.Right : DirectionState.Left;
+        hits = Physics2D.RaycastAll(transform.position, transform.position + new Vector3(0, -1, 0));
+        //bool isGround = hits.Any(s => s.transform.name.Equals("Tilemap"));
+        bool isGround = hits.Any(s => s.transform.tag.Equals("Ground"));
+        return isGround;
     }
-
-    private void Update()
-    {
-        if (_moveState == MoveState.Jump)
-        {
-            if (_rigidbody.velocity == Vector2.zero)
-            {
-                Idle();
-            }
-        }
-        else if (_moveState == MoveState.Walk)
-        {
-            _rigidbody.velocity = ((_directionState == DirectionState.Right ? Vector2.right : -Vector2.right)
-                                    * WalkSpeed * Time.deltaTime);
-            _walkTime -= Time.deltaTime;
-            if (_walkTime <= 0)
-            {
-                Idle();
-            }
-        }
-    }
-
     enum DirectionState
     {
         Right,
@@ -102,4 +111,33 @@ public class Player : MonoBehaviour
         Walk,
         Jump
     }
+
+    // Bounds bounds = GetComponent<Collider2D>().bounds;
+    //Vector2 point = bounds.center;
+
+
+    //void OnDrawGizmosSelected()
+    //{
+    //Gizmos.color = Color.yellow;
+    //Gizmos.DrawSphere(gameObject.transform.position, 5);
+    //Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, -1, 0));
+    //}
+
+    //void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    Debug.Log(other.tag);
+    //    if (other.tag == "Ground")
+    //    {
+    //        Debug.Log("Ground");
+    //        //playerMovement.detachment();
+
+    //    }
+    //}
+
+    //void OnCollisionEnter2D(Collision2D obj)
+    //{
+    //Debug.Log(obj.transform.name);
+    //Destroy(obj.gameObject);
+
+    //}
 }

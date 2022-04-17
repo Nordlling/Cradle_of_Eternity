@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176e17272195cc0429f3a9cf914fce0e, type: 3}
   m_Name: Scythe
   m_EditorClassIdentifier: 
-  _name: "\u0421\u0432\u0438\u043D\u0438\u043D\u0430"
-  _uiIcon: {fileID: 7091432201662537625, guid: 439d6be5695f4a04194d8031977a475b, type: 3}
+  _name: "\u041A\u043E\u0441\u0430"
+  _uiIcon: {fileID: -6523628323415844430, guid: 9ecc3536a88a6ee40bc1a9b1255be122, type: 3}
